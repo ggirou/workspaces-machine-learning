@@ -57,10 +57,18 @@ RUN bash /tmp/install_chrome.sh
 COPY resources/install_edge.sh /tmp/
 RUN bash /tmp/install_edge.sh
 
+# Install Knime
+RUN cd /opt/ \
+    && wget https://download.knime.org/analytics-platform/linux/knime-latest-linux.gtk.x86_64.tar.gz \
+    && tar xvf knime-latest-linux.gtk.x86_64.tar.gz \
+    && rm -rf knime-latest-linux.gtk.x86_64.tar.gz \
+    && mv /opt/knime_* /opt/knime
+
 # Create desktop shortcuts
 COPY resources/spyder.desktop $HOME/Desktop/
 COPY resources/jupyter.desktop $HOME/Desktop/
 COPY resources/pycharm.desktop ${HOME}/Desktop/
+COPY resources/knime.desktop $HOME/Desktop/
 RUN cp /usr/share/applications/org.remmina.Remmina.desktop $HOME/Desktop/ \
     && chmod +x $HOME/Desktop/org.remmina.Remmina.desktop \
     && chown 1000:1000 $HOME/Desktop/org.remmina.Remmina.desktop

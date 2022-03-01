@@ -62,7 +62,8 @@ RUN cd /opt/ \
     && wget https://download.knime.org/analytics-platform/linux/knime-latest-linux.gtk.x86_64.tar.gz \
     && tar xvf knime-latest-linux.gtk.x86_64.tar.gz \
     && rm -rf knime-latest-linux.gtk.x86_64.tar.gz \
-    && mv /opt/knime_* /opt/knime
+    && mv /opt/knime_* /opt/knime \
+    && echo -e '\n-Duser.home=/home/kasm-user' >> /opt/knime/knime.ini
 
 # Create desktop shortcuts
 COPY resources/spyder.desktop $HOME/Desktop/
